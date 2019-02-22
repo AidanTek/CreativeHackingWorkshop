@@ -65,7 +65,11 @@ That's it, everything is connected! Once I have inspected your setup, you can pl
 
 ---
 
+The following section contains a number of examples to get your flash on, using the Adafruit Neopixel library. Open Arduino to get started.
+
 #### How to light up an LED
+
+This example shows the most fundamental commands required to control addressable LEDs using the Neopixel library - there are a couple of lines required at the top of your sketch to initialise the software and hardware (this will mostly be the same in all the examples). The main program is created in the void loop() section - there are just two commands here but they are the most important!
 
 This example sketch can be found in the "basic_light" file in the repository - or you can type it as below:
 
@@ -88,8 +92,21 @@ void loop() {
 }
 ```
 
+Try changing the code in void loop() to light up a different LED, and try making it a different colour. The command pixels.setPixelColor() has 4 input criteria seperated by comma, which are ordered like this:
+
+```cpp
+pixels.setPixelColor("LED number", "Red Level", "Green Level", "Blue Level");
+``` 
+
+n.b. Curly brackets like {} indicate where a section starts and ends - make sure that your code is within the void loop() section.
+
+---
 
 #### Make a pattern with a sequence
+
+void loop() as the name suggests, is indeed a loop. Commands are executed one line at a time from the top to the bottom. When the bottom line is reached, the program jumps back to the top.
+
+The example below shows a sequence of commands that will repeat over time. A new command is used, delay() which will pause the program for a set amount of time.
 
 This example sketch can be found in the "basic_sequence" file in the repository - or you can type it as below:
 
@@ -132,7 +149,19 @@ void loop() {
 }
 ```
 
-#### Using a Variable
+Try making your own sequence, and try changing the delay() value to make your program run faster or slower.
+
+---
+
+#### Using variables
+
+Variables are very useful when creating a program. They come in many forms and are used to store some information. In this example a number variable is used to create a more complicated sequence, but with just a few lines of code.
+
+**byte** and **int** are both number variables, when you create a new variable, you give it a unique name like *counter* and optionally you can give it an initial value, for example:
+
+```cpp
+int counter = 0;
+``` 
 
 This example sketch can be found in the "basic_variables" file in the repository - or you can type it as below:
 
@@ -165,9 +194,21 @@ void loop() {
   }
 }
 ```
+See how the variable *counter* is used as part of pixels.setPixelColor() to pick the next LED to light up.
 
+This example also used an if() command. An if() will only execute the code in it's curly brackets, if the argument provided in it's round brackets turns out true. 
 
-#### Using Random
+Every time void loop() reaches the line 'counter++;', the *counter* variable will have 1 added to it. The if() argument is only true if *counter* is greater than or equal to the *totalpixels* variable - or in other words >= 50. When this happens, *counter* is reset to 0.
+
+**Challenge:** Can you change this sketch to make the LED strip turn each LED off one by one, in reverse order? 
+
+---
+
+#### Using random()
+
+random() is a fun command that can be used to inject some generative qualities into your light sequence. In the example below, every time void loop() starts, a new set of random numbers are generated for red, green and blue values, and a random LED is picked to update. 
+
+Observe how the variables are used in pixels.setPixelColor()
 
 This example sketch can be found in the "random" file in the repository - or you can type it as below:
 
@@ -199,7 +240,13 @@ void loop() {
 }
 ```
 
-#### For Loop
+What else could you randomise?
+
+---
+
+#### for() Loop
+
+This is a little more complicated, but is a very useful technique! Loops are used a lot in programming - this example demonstrates a use for a for() loop. I imagine the for() command as saying "*for* this many times, repeat this code". It is useful when you want to repeat the same command many times. Have a look at the example.
 
 This example sketch can be found in the "for_loop" file in the repository - or you can type it as below:
 
@@ -235,7 +282,37 @@ void loop() {
 }
 ```
 
+The for() loop looks very complicated, but if you break down the components it is not too bad - here is the example:
+
+```cpp
+for(byte x = 0; x < totalpixels; x++)
+```
+
+The for has 3 criteria, and although they look a bit different, we have seen them all already:
+
+**byte x = 0;** - create a new variable called x and start it at 0
+**x < totalpixels** - is *x* less than *totalpixels*?
+**x++** - add 1 to x
+
+The for() loop keeps on repeating until *x* equals *totalpixels* and each time it does loop, *x* has 1 added to it.
+
+This gets interesting when you use the for() loop variable *x* in the code found in the curly brackets!
+
+```cpp
+for(byte x = 0; x < totalpixels; x++) {
+    pixels.setPixelColor(x, 0, 0, 255); // preset led "x" to be blue
+    pixels.show(); // light it up!
+    delay(100); // wait for 100 ms
+  }
+```
+
+Try making a sequence of for() loops to light up the entire strip in different colours.
+
+---
+
 #### Fade
+
+This next example uses a for() loop within a for() loop to achieve a nice fade effect, this is called 'nesting' - see if you can work out what is going on in the example.
 
 This example sketch can be found in the "for_loop_fade" file in the repository - or you can type it as below:
 
@@ -274,6 +351,8 @@ void loop() {
   delay(100); // wait for some time 
 }
 ```
+
+**Challenge:** Can you make the LEDs fade back out as well as fading in?
 
 #### Modulo
 	
