@@ -354,7 +354,23 @@ void loop() {
 
 **Challenge:** Can you make the LEDs fade back out as well as fading in?
 
+---
+
 #### Modulo
+
+Modulo **%** is an interesting math command, the result of modulo is the remainder of a number divided by another, for example:
+
+2 % 2 = 0
+3 % 2 = 1
+4 % 2 = 0
+5 % 2 = 1
+
+or:
+
+6 % 3 = 0
+7 % 3 = 1
+
+You can use modulo to create patterns in the LED strip in combination with the if() command.
 	
 This example sketch can be found in the "modulo" file in the repository - or you can type it as below:
 
@@ -398,5 +414,8 @@ void loop() {
   delay(100); // wait for some time 
 }
 ```
+---
+
+Now try making some combinations of the techniques you have learned to see what kinds of sequences you can produce.
 
 
